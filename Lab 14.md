@@ -4,34 +4,43 @@
 
 ## Use Case Diagram
 
-The Use Case Diagram for the DnD AI Game Master system is included in this repository:
+### Diagram 1 — Core Elements (Actors, Use Cases, Associations)
 
-- **Diagram 1 - Core Elements:** `Diagram1_Core_Elements.drawio` — Shows all actors (Player, LLM API, Vector Database, Image Generation Service, TTS Service), 17 use cases inside the system boundary, and association lines.
-- **Diagram 2 - Relationships:** `Diagram2_Relationships.drawio` — Shows `<<include>>` and `<<extend>>` relationships between use cases.
+![Core Elements](Diagram1_Core_Elements.drawio.png)
 
-## Completed Use Case: Roll Dice
+### Diagram 2 — Relationships (Include & Extend)
 
-The **Roll Dice** use case has been implemented in `roll_dice.py`.
+![Relationships](Diagram2_Relationships.drawio.png)
 
-### Description
+## Completed Use Cases
 
-The Roll Dice feature allows the player to roll standard DnD dice using standard notation (e.g., `2d6`, `1d20+5`, `3d8-2`). It supports:
+### 1. Roll Dice (`roll_dice.py`)
+
+The **Roll Dice** use case allows the player to roll standard DnD dice using standard notation (e.g., `2d6`, `1d20+5`, `3d8-2`). It supports:
 
 - All standard DnD dice types: d4, d6, d8, d10, d12, d20, d100
 - Multiple dice rolls (e.g., `4d6`)
 - Modifiers (e.g., `1d20+5` for attack rolls with bonuses)
 - Ability score generation using the 4d6-drop-lowest method
 
-### How to Run
-
 ```bash
 python roll_dice.py
 ```
 
-### Relationship to Use Case Diagram
+**Relationship to Use Case Diagram:** Roll Dice is an `<<include>>` from Engage in Combat, Attempt Skill Check, and Calculate Damage.
 
-In the Use Case Diagram, **Roll Dice** is an `<<include>>` relationship from several use cases:
+---
 
-- **Engage in Combat** `<<include>>` Roll Dice — Combat requires dice rolls for attacks and saves
-- **Attempt Skill Check** `<<include>>` Roll Dice — Skill checks require a d20 roll
-- **Calculate Damage** `<<include>>` Roll Dice — Damage calculation requires rolling damage dice
+### 2. Manage Inventory (`inventory.py`)
+
+The **Manage Inventory** use case allows the player to add, remove, and view items in their character's inventory. It supports:
+
+- Adding items with quantity (e.g., add 3 Health Potions)
+- Removing items by quantity
+- Viewing full inventory with item counts
+
+```bash
+python inventory.py
+```
+
+**Relationship to Use Case Diagram:** Manage Inventory is directly associated with the Player actor via an association line in the core elements diagram.
