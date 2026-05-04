@@ -1,0 +1,21 @@
+# Environment variables
+.env
+*.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# ChromaDB persistence
+chroma_db/
+
+# Generated assets
+generated_images/
+generated_audio/
+
+# IDE
+.vscode/
+.idea/

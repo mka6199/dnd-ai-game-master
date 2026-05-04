@@ -1,0 +1,14 @@
+The Drunken Griffin is the only tavern in the village of Larkspur. Its sign
+shows a griffin holding a tankard. The tavern is owned by Borin Stoutfoot,
+a retired dwarven ranger who lost his left eye to a manticore. Borin is gruff
+but loyal and serves an excellent venison stew. Regular patrons include:
+
+- OLD WICK: a half-elf bard with a flask, knows every rumor in the Vale.
+- SISTER ANNETTE: cleric of Lathander, runs the small shrine next door,
+  often sits in the corner praying. Will heal injured travelers for a donation.
+- CAPTAIN VEX: a half-orc retired sellsword with a glass eye, looking for new
+  recruits for "easy work" that is rarely easy.
+- THE HOODED FIGURE: never gives a name. Speaks only when spoken to.
+  Always pays in gold pieces from a strange black coin pouch.
+
+The tavern serves as a hub for rumors, quests, and chance encounters.

@@ -1,0 +1,26 @@
+CONDITIONS (D&D 5e Quick Reference)
+
+POISONED: A poisoned creature has disadvantage on attack rolls and ability checks.
+
+PRONE: A prone creature's only movement option is to crawl. The creature has
+disadvantage on attack rolls. Attack rolls against the creature have advantage
+if the attacker is within 5 feet, otherwise disadvantage.
+
+FRIGHTENED: A frightened creature has disadvantage on ability checks and attack
+rolls while the source of its fear is within line of sight. The creature can't
+willingly move closer to the source of its fear.
+
+GRAPPLED: A grappled creature's speed becomes 0. The condition ends if the
+grappler is incapacitated.
+
+RESTRAINED: A restrained creature's speed becomes 0. Attack rolls against it
+have advantage; its attack rolls have disadvantage. Disadvantage on Dex saves.
+
+INVISIBLE: An invisible creature is impossible to see without special senses.
+Attack rolls against it have disadvantage; its attack rolls have advantage.
+
+UNCONSCIOUS: Incapacitated, can't move or speak, drops everything, falls prone.
+Attacks against the creature have advantage; attacks within 5 ft. are crits.
+
+ADVANTAGE / DISADVANTAGE: Roll 2d20, take the higher (advantage) or lower
+(disadvantage). They cancel out and don't stack.

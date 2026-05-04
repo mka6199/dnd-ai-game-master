@@ -1,0 +1,22 @@
+GIANT SPIDER (CR 1)
+Large beast, unaligned
+AC 14 (natural armor), HP 26 (4d10+4), Speed 30 ft., climb 30 ft.
+STR 14 (+2), DEX 16 (+3), CON 12 (+1), INT 2 (-4), WIS 11 (+0), CHA 4 (-3)
+Skills: Stealth +7
+Senses: blindsight 10 ft., darkvision 60 ft.
+
+Spider Climb: Can climb difficult surfaces, including upside down on ceilings,
+without needing to make an ability check.
+
+Web Sense: While in contact with a web, the spider knows the exact location
+of any other creature also in contact with the same web.
+
+Web Walker: The spider ignores movement restrictions caused by webbing.
+
+Actions:
+- Bite: +5 to hit, 5 ft., one creature. Hit: 7 (1d8+3) piercing damage,
+  and the target must make a DC 11 Constitution saving throw, taking 9 (2d8)
+  poison damage on a failure, or half on a success. If reduced to 0 HP by this,
+  the creature is stable but poisoned for 1 hour.
+- Web (Recharge 5-6): Ranged Weapon Attack +5 to hit, range 30/60 ft.,
+  one Large or smaller creature. Hit: target is restrained by webbing.

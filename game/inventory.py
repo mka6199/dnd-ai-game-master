@@ -10,6 +10,14 @@ class Inventory:
     def __init__(self):
         self.items = {}
 
+    def _find_key(self, item_name: str):
+        """Case-insensitive lookup of an existing inventory key."""
+        target = item_name.strip().lower()
+        for key in self.items:
+            if key.lower() == target:
+                return key
+        return None
+
     def add_item(self, item_name: str, quantity: int = 1) -> str:
         item_name = item_name.strip()
         if not item_name:
@@ -17,25 +25,28 @@ class Inventory:
         if quantity < 1:
             raise ValueError("Quantity must be at least 1.")
 
-        if item_name in self.items:
-            self.items[item_name] += quantity
-        else:
-            self.items[item_name] = quantity
-
-        return f"Added {quantity}x {item_name}. (Total: {self.items[item_name]})"
+        # Title-case new items for consistent display; merge with existing case-insensitive matches.
+        existing = self._find_key(item_name)
+        if existing:
+            self.items[existing] += quantity
+            return f"Added {quantity}x {existing}. (Total: {self.items[existing]})"
+        canonical = item_name.title()
+        self.items[canonical] = quantity
+        return f"Added {quantity}x {canonical}. (Total: {self.items[canonical]})"
 
     def remove_item(self, item_name: str, quantity: int = 1) -> str:
         item_name = item_name.strip()
-        if item_name not in self.items:
+        existing = self._find_key(item_name)
+        if not existing:
             raise ValueError(f"'{item_name}' not found in inventory.")
-        if quantity > self.items[item_name]:
-            raise ValueError(f"Only have {self.items[item_name]}x {item_name}.")
+        if quantity > self.items[existing]:
+            raise ValueError(f"Only have {self.items[existing]}x {existing}.")
 
-        self.items[item_name] -= quantity
-        if self.items[item_name] == 0:
-            del self.items[item_name]
-            return f"Removed all {item_name} from inventory."
-        return f"Removed {quantity}x {item_name}. (Remaining: {self.items[item_name]})"
+        self.items[existing] -= quantity
+        if self.items[existing] == 0:
+            del self.items[existing]
+            return f"Removed all {existing} from inventory."
+        return f"Removed {quantity}x {existing}. (Remaining: {self.items[existing]})"
 
     def view(self) -> str:
         if not self.items:

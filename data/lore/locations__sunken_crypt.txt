@@ -1,0 +1,24 @@
+The Sunken Crypt of Veshara is a three-level dungeon located beneath
+the abandoned Thornwood Estate, two miles east of Larkspur village.
+It was sealed three hundred years ago when the elven necromancer Veshara
+Thornwood was defeated by a coalition of paladins led by Lady Mira's
+great-grandmother.
+
+LEVEL 1 - The Forgotten Halls:
+- Entrance is a stone trapdoor in the estate's chapel, hidden under a torn rug.
+- Long stone corridor with crumbling frescoes depicting Veshara's rise.
+- Pressure-plate trap at the midpoint (DC 15 Investigation to spot,
+  triggers a poison dart, +5 to hit, 1d4+2 piercing + 1d6 poison).
+- The "Hall of Whispers" - a circular room where ghostly voices reveal
+  hints about lower levels if a player succeeds DC 13 Wisdom save.
+- Guarded by 4 skeletons reanimated by residual necromancy.
+
+LEVEL 2 - The Library of Bones:
+- Ancient library with rotting tomes; some still functional spell scrolls.
+- Giant spiders have nested here (3-5 of them).
+- Multi-stage puzzle: three plinths each requiring a different colored
+  gemstone (red, blue, green) found scattered across the floor.
+
+LEVEL 3 - Veshara's Sanctum:
+- Final boss chamber. Veshara's preserved phylactery is here.
+- Destroying the phylactery completes the main quest.

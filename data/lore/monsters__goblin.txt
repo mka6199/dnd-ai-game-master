@@ -1,0 +1,19 @@
+GOBLIN (CR 1/4)
+Small humanoid (goblinoid), neutral evil
+Armor Class: 15 (leather armor, shield)
+Hit Points: 7 (2d6)
+Speed: 30 ft.
+STR 8 (-1), DEX 14 (+2), CON 10 (+0), INT 10 (+0), WIS 8 (-1), CHA 8 (-1)
+Skills: Stealth +6
+Senses: darkvision 60 ft., passive Perception 9
+Languages: Common, Goblin
+
+Nimble Escape: The goblin can take the Disengage or Hide action as a bonus action.
+
+Actions:
+- Scimitar: +4 to hit, 5 ft., one target. Hit: 5 (1d6+2) slashing damage.
+- Shortbow: +4 to hit, range 80/320, one target. Hit: 5 (1d6+2) piercing damage.
+
+Lore: Goblins are cowardly and prefer ambushes. In Whispering Vale, the
+Black Tooth tribe operates from caves in the eastern hills, led by the
+infamous chief Snikgut.

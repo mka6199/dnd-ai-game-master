@@ -1,0 +1,33 @@
+SKILL CHECKS (D&D 5e)
+
+Common DCs:
+- Very Easy: 5
+- Easy: 10
+- Medium: 15
+- Hard: 20
+- Very Hard: 25
+- Nearly Impossible: 30
+
+Roll: 1d20 + ability modifier + proficiency bonus (if proficient)
+
+Common Skills and Their Ability:
+- Athletics (STR): climbing, jumping, swimming, grappling
+- Acrobatics (DEX): balance, tumbling, complex maneuvers
+- Stealth (DEX): hiding, moving silently
+- Sleight of Hand (DEX): pickpocketing, palming objects
+- Arcana (INT): magical lore, recognizing spells
+- History (INT): historical events, lost civilizations
+- Investigation (INT): finding hidden objects, deducing clues
+- Nature (INT): natural lore, weather, plants, animals
+- Religion (INT): deities, holy rites, religious lore
+- Animal Handling (WIS): calming or controlling animals
+- Insight (WIS): reading people, detecting lies
+- Medicine (WIS): stabilizing dying, diagnosing illness
+- Perception (WIS): noticing things in environment
+- Survival (WIS): tracking, foraging, navigation
+- Deception (CHA): lying convincingly
+- Intimidation (CHA): threats, displays of force
+- Performance (CHA): entertaining
+- Persuasion (CHA): genuine appeals, diplomacy
+
+Passive Perception = 10 + WIS modifier + proficiency (if Perception proficient).
