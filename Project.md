@@ -217,7 +217,21 @@ location descriptions, rules adjudication).
 
 ## 6. Additional Tools / Innovation
 
-Two creative add-ons live in [`game/innovation.py`](game/innovation.py):
+Three creative add-ons live in [`game/llm.py`](game/llm.py) and
+[`game/innovation.py`](game/innovation.py):
+
+### Pluggable LLM backend (OpenAI **or** Ollama)
+[`game/llm.py`](game/llm.py) abstracts the chat API behind a single
+`chat()` function and selects the backend from the `LLM_PROVIDER` env
+variable. Setting `LLM_PROVIDER=ollama` routes every request to a local
+[Ollama](https://ollama.com) server through its OpenAI-compatible `/v1`
+endpoint, which means tool/function calling, streaming, and the agent
+loop all work unchanged — no API costs, no internet required. The RAG
+layer in [`game/rag.py`](game/rag.py) mirrors the same switch and uses
+`nomic-embed-text` locally instead of OpenAI embeddings (writing to a
+separate Chroma collection so vector dimensions never collide). This
+directly addresses the requirement that the project be runnable without
+paid API access.
 
 ### Voiced AI narration (gTTS)
 The player can click "🔊 Voice this narration" beside any DM response.
@@ -245,7 +259,9 @@ map generation" scenarios from the rubric.
 - **Documentation**: Every module has a module-level docstring; every public
   function has type hints and a docstring.
 - **Configuration**: All secrets via `.env` (with `.env.example` checked in,
-  `.env` git-ignored). Model name is parameterized via `OPENAI_MODEL`.
+  `.env` git-ignored). Model name is parameterized via `OPENAI_MODEL` /
+  `OLLAMA_MODEL`, and the active backend is selected by `LLM_PROVIDER`
+  (`openai` or `ollama`).
 - **Reproducibility**: `requirements.txt` pins minimum versions of each
   dependency.
 - **Version control**: The repository has incremental commits demonstrating
@@ -265,12 +281,14 @@ implementation).
 # 1. Install dependencies
 pip install -r requirements.txt
 
-# 2. Configure your API key
+# 2. Configure your provider
 cp .env.example .env
-# then edit .env and paste your OpenAI key
+# then edit .env:
+#   LLM_PROVIDER=openai  -> add OPENAI_API_KEY (paid)
+#   LLM_PROVIDER=ollama  -> install Ollama and `ollama pull llama3.1`
 
 # 3. Launch the app
-streamlit run app.py
+python -m streamlit run app.py
 ```
 
 The first launch will seed ChromaDB from `data/lore/` automatically.

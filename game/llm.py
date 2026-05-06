@@ -1,7 +1,9 @@
-"""LLM wrapper around the OpenAI Chat Completions API.
+"""LLM wrapper supporting both OpenAI (cloud) and Ollama (local).
 
-Centralizes model calls so we can swap providers later. Handles tool/function
-calling and parameter selection per scenario.
+Set LLM_PROVIDER=openai (default) or LLM_PROVIDER=ollama in .env.
+
+Ollama is used via its OpenAI-compatible /v1 endpoint so the same OpenAI
+Python SDK code path handles both providers, including tool/function calling.
 """
 
 from __future__ import annotations
@@ -19,21 +21,42 @@ load_dotenv()
 _client: OpenAI | None = None
 
 
-def get_client() -> OpenAI:
-    """Lazy singleton OpenAI client."""
-    global _client
-    if _client is None:
-        api_key = os.getenv("OPENAI_API_KEY")
-        if not api_key or api_key == "your-openai-api-key-here":
-            raise RuntimeError(
-                "OPENAI_API_KEY is not set. Copy .env.example to .env and add your key."
-            )
-        _client = OpenAI(api_key=api_key)
-    return _client
+def get_provider() -> str:
+    """Return 'openai' or 'ollama' (lowercased)."""
+    return os.getenv("LLM_PROVIDER", "openai").strip().lower()
 
 
 def get_model() -> str:
+    """Return the chat model name for the active provider."""
+    if get_provider() == "ollama":
+        return os.getenv("OLLAMA_MODEL", "llama3.1")
     return os.getenv("OPENAI_MODEL", "gpt-4o-mini")
+
+
+def get_client() -> OpenAI:
+    """Lazy singleton client. Routed to OpenAI or to a local Ollama server."""
+    global _client
+    if _client is None:
+        provider = get_provider()
+        if provider == "ollama":
+            base_url = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434/v1")
+            # Ollama ignores the API key but the SDK requires a non-empty value.
+            _client = OpenAI(api_key="ollama", base_url=base_url)
+        else:
+            api_key = os.getenv("OPENAI_API_KEY")
+            if not api_key or api_key == "your-openai-api-key-here":
+                raise RuntimeError(
+                    "OPENAI_API_KEY is not set. Copy .env.example to .env and add your key, "
+                    "or set LLM_PROVIDER=ollama to use a local model."
+                )
+            _client = OpenAI(api_key=api_key)
+    return _client
+
+
+def reset_client() -> None:
+    """Drop the cached client (useful if the user switches providers at runtime)."""
+    global _client
+    _client = None
 
 
 def chat(
@@ -71,7 +94,16 @@ def chat(
 
 
 def generate_image(prompt: str, size: str = "1024x1024") -> str:
-    """Generate an image using DALL-E 3 and return the URL."""
+    """Generate an image. Only supported on the OpenAI provider (DALL-E 3).
+
+    Raises RuntimeError if the active provider is Ollama (no local image model
+    is shipped with this project).
+    """
+    if get_provider() != "openai":
+        raise RuntimeError(
+            "Image generation requires LLM_PROVIDER=openai. "
+            "Ollama mode does not include an image model."
+        )
     client = get_client()
     response = client.images.generate(
         model="dall-e-3",

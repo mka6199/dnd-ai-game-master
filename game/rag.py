@@ -15,21 +15,45 @@ from chromadb.utils import embedding_functions
 
 
 CHROMA_PATH = "chroma_db"
-COLLECTION_NAME = "dnd_lore"
+COLLECTION_NAME_OPENAI = "dnd_lore"
+COLLECTION_NAME_OLLAMA = "dnd_lore_ollama"  # different vector dims => separate collection
+
+
+def _get_provider() -> str:
+    return os.getenv("LLM_PROVIDER", "openai").strip().lower()
 
 
 class LoreStore:
-    """Wrapper around a ChromaDB collection for the campaign world."""
+    """Wrapper around a ChromaDB collection for the campaign world.
+
+    Picks an embedding backend (OpenAI or local Ollama) based on LLM_PROVIDER.
+    Each backend writes to its own collection so vector dimensions never clash.
+    """
 
     def __init__(self, persist_dir: str = CHROMA_PATH):
         self.client = chromadb.PersistentClient(path=persist_dir)
-        # Default OpenAI embedding (text-embedding-3-small) is cheap and good
-        self.embedder = embedding_functions.OpenAIEmbeddingFunction(
-            api_key=os.getenv("OPENAI_API_KEY"),
-            model_name="text-embedding-3-small",
-        )
+
+        if _get_provider() == "ollama":
+            base_url = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434/v1")
+            # Strip the trailing /v1 — Chroma's OllamaEmbeddingFunction wants the root URL.
+            ollama_root = base_url.rstrip("/")
+            if ollama_root.endswith("/v1"):
+                ollama_root = ollama_root[:-3]
+            embed_model = os.getenv("OLLAMA_EMBED_MODEL", "nomic-embed-text")
+            self.embedder = embedding_functions.OllamaEmbeddingFunction(
+                url=f"{ollama_root}/api/embeddings",
+                model_name=embed_model,
+            )
+            collection_name = COLLECTION_NAME_OLLAMA
+        else:
+            self.embedder = embedding_functions.OpenAIEmbeddingFunction(
+                api_key=os.getenv("OPENAI_API_KEY"),
+                model_name="text-embedding-3-small",
+            )
+            collection_name = COLLECTION_NAME_OPENAI
+
         self.collection = self.client.get_or_create_collection(
-            name=COLLECTION_NAME,
+            name=collection_name,
             embedding_function=self.embedder,
         )
 
